@@ -21,8 +21,11 @@ class AuthenticationController extends Controller
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
 
-        return $user->createToken('user login')->plainTextToken;
-        
+        $token = $user->createToken('user login')->plainTextToken;
+        return response()->json([
+            'message' => 'Login successful!',
+            'access_token' => $token,
+        ]);
     }
 
 }
