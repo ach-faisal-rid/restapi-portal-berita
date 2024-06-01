@@ -14,4 +14,8 @@ class Post extends Model
         'author'
     ];
 
+    public function writer() {
+        return $this->belongsTo(User::class, 'author','id');
+    }
+
 }
