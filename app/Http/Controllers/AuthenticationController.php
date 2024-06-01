@@ -28,10 +28,15 @@ class AuthenticationController extends Controller
         ]);
     }
 
+    // cek current user
+    public function current(Request $request) {
+        return response()->json(Auth::user());
+    }
+
+
     // proses logout
     public function logout(Request $request) {
         $request->user()->currentAccessToken()->delete();
-        Auth::logout(); // Laravel's built-in logout method
         return response()->json([
             'message' => 'Logout successful!'
         ]);

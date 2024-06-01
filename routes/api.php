@@ -18,11 +18,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function() {
     Route::post('/logout', [AuthenticationController::class, 'logout']);
+    Route::get('/current', [AuthenticationController::class, 'current']);
 });
 
 Route::get('/posts', [PostController::class, 'index']);
 Route::get('/posts/{id}', [PostController::class, 'show']);
-Route::post('login', [AuthenticationController::class, 'login']);
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('/login', [AuthenticationController::class, 'login']);
