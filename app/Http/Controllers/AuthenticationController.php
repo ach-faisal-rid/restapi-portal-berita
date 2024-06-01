@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use Hash;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -25,6 +25,19 @@ class AuthenticationController extends Controller
         return response()->json([
             'message' => 'Login successful!',
             'access_token' => $token,
+        ]);
+    }
+
+    // proses logout
+    public function logout(Request $request) {
+        // Invalidate the user's current access token
+        $request->user()->currentAccessToken()->delete();
+
+        // Use Laravel's built-in logout to invalidate session and other data
+        Auth::logout();
+
+        return response()->json([
+            'message' => 'Logout successful!'
         ]);
     }
 
