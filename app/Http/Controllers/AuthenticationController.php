@@ -30,12 +30,8 @@ class AuthenticationController extends Controller
 
     // proses logout
     public function logout(Request $request) {
-        // Invalidate the user's current access token
         $request->user()->currentAccessToken()->delete();
-
-        // Use Laravel's built-in logout to invalidate session and other data
-        Auth::logout();
-
+        Auth::logout(); // Laravel's built-in logout method
         return response()->json([
             'message' => 'Logout successful!'
         ]);
