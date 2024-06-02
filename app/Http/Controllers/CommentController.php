@@ -45,4 +45,18 @@ class CommentController extends Controller
         return new CommentResource($comment->loadMissing(['commentator:id,username']));
     }
 
+    // delete atau soft delete
+    public function destroy($id) {
+        $comment = Comment::findOrFail($id);
+
+        // Check authorization
+        if ($comment->user_id != Auth::id()) {
+            return response()->json(['message' => 'You are not authorized to delete this comment'], 403);
+        }
+
+        $comment->delete();
+
+        return response()->json(['message' => 'Comment deleted successfully'], 200);
+    }
+
 }
