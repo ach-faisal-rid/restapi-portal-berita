@@ -17,8 +17,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->group(function() {
-    Route::post('/logout', [AuthenticationController::class, 'logout']);
+
+    // management user
     Route::get('/current', [AuthenticationController::class, 'current']);
+    Route::post('/logout', [AuthenticationController::class, 'logout']);
+
+    // post
+    Route::post('/posts',[PostController::class, 'store']);
 });
 
 Route::get('/posts', [PostController::class, 'index']);
