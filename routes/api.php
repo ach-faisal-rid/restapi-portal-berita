@@ -21,7 +21,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthenticationController::class, 'logout']);
 
     // Post Management
-    Route::post('/posts', [PostController::class, 'store']);
+    Route::post('/post', [PostController::class, 'store']);
+    Route::put('/post/{id}', [PostController::class, 'update']);
 });
 
 Route::get('/posts', [PostController::class, 'index']);
