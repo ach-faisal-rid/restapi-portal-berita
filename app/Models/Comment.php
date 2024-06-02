@@ -26,4 +26,8 @@ class Comment extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    public function commentator() {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }
