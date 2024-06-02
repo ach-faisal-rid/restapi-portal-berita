@@ -67,4 +67,23 @@ class PostController extends Controller
         return new PostDetailResource($post->loadMissing('writer:id,username'));
     }
 
+    // delete atau soft delete
+    public function destroy($id) {
+        $post = Post::find($id);
+
+        if (!$post) {
+            return response()->json(['message' => "Post with ID $id not found"], 404);
+        }
+
+        // Cek apakah pengguna memiliki izin untuk menghapus post ini
+        if ($post->author != Auth::user()->id) {
+            return response()->json(['message' => "You are not authorized to delete this post"], 403);
+        }
+
+        // Hapus post
+        $post->delete();
+
+        return response()->json(['message' => 'Post deleted successfully'], 200);
+    }
+
 }
