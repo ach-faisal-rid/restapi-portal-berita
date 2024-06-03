@@ -3,6 +3,7 @@
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/current', [AuthenticationController::class, 'current']);
     Route::post('/logout', [AuthenticationController::class, 'logout']);
+
+    // Change Password
+    Route::post('/change-password', [UserController::class, 'changePassword']);
+
+    // Update Profile (Change Email, Username, and Profile)
+    Route::put('/update-profile', [UserController::class, 'updateProfile']);
 
     // Post Management
     Route::post('/post', [PostController::class, 'store']);

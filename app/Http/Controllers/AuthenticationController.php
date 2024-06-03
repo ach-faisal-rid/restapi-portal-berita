@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthenticationController extends Controller
 {
@@ -32,8 +33,7 @@ class AuthenticationController extends Controller
     public function current(Request $request) {
         return response()->json(Auth::user());
     }
-
-
+    
     // proses logout
     public function logout(Request $request) {
         $request->user()->currentAccessToken()->delete();
