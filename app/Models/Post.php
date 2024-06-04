@@ -20,7 +20,7 @@ class Post extends Model
         return $this->belongsTo(User::class, 'author','id');
     }
     // Relasi ke user
-    public function user()
+    public function author()
     {
         return $this->belongsTo(User::class);
     }
