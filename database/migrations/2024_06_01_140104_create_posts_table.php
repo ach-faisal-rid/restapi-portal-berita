@@ -15,7 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('title', 255);
             $table->text('image')->nullable();
-            $table->text('news_content');
+            $table->text('description');
+            $table->text('category');
+            $table->text('tag');
+            $table->enum('types', ['news', 'blog']);
             $table->unsignedBigInteger('author');
 
             $table->foreign('author')->references('id')->on('users');

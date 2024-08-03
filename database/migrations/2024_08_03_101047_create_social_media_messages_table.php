@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('social_media_messages', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('post_id');
-            $table->unsignedBigInteger('user_id');
-            $table->text('comments');
+            $table->text('content');
+            $table->unsignedBigInteger('sender_id');
+            $table->unsignedBigInteger('receiver_id');
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('post_id')->references('id')->on('posts');
+            $table->foreign('sender_id')->references('id')->on('users');
+            $table->foreign('receiver_id')->references('id')->on('users');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('social_media_messages');
     }
 };
